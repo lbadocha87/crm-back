@@ -1,16 +1,20 @@
-const express = require('express');
-const cors = require('cors');
+require('dotenv').config();
+
+const express = require("express");
+const cors = require("cors");
 const app = express();
 const port = 5050;
-const customerApi = require('./app/api/customerApi');
-const customerEventApi = require('./app/api/customerEventApi');
+const customerApi = require("./app/api/customerApi");
+const customerEventApi = require("./app/api/customerEventApi");
+const userApi = require("./app/api/userApi");
+const auth = require("./app/middlewares/auth");
 
 app.use(cors());
 
 app.use(express.json());
 
-app.use('/api/customer', customerApi)
-app.use('/api/customerEvent', customerEventApi)
+app.use("/api/customer", auth, customerApi);
+app.use("/api/customerEvent", auth, customerEventApi);
+app.use("/api/user", userApi);
 
-
-app.listen(port)
+app.listen(port);
