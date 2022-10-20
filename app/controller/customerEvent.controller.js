@@ -18,6 +18,24 @@ function addCustomerEvent(customerId, data, cb) {
   });
 }
 
+function deleteCustomerEvent(customerId, customerEventId, cb) {
+  Customer.findById(customerId, function (err, customer) {
+    if (err) return;
+
+    customer.events.pull(customerEventId);
+    customer.save();
+  });
+
+  CustomerEvent.deleteOne({ _id: customerEventId }, function (err, log) {
+    if (err) {
+      cb(err);
+    } else {
+      cb(null, log);
+    }
+  });
+}
+
 module.exports = {
   add: addCustomerEvent,
+  delete: deleteCustomerEvent,
 };

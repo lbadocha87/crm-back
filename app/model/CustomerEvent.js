@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://localhost:27017/crm", {
+mongoose.connect("mongodb+srv://mietek:1234@cluster0.lihsftb.mongodb.net/crm", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });

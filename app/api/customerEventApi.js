@@ -17,4 +17,21 @@ router.post("/add/:customerId", function (req, res) {
   );
 });
 
+router.delete("/delete/:customerId", function (req, res) {
+
+  console.log(req.body.customerEventId)
+  console.log(req.params.customerId)
+  customerEvent.delete(
+    req.params.customerId,
+    req.body.customerEventId,
+    function (err, log) {
+      if (err) {
+        res.json({ error: true });
+      } else {
+        res.json(log);
+      }
+    }
+  );
+});
+
 module.exports = router;
